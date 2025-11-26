@@ -1,0 +1,227 @@
+"use client"
+
+import type React from "react"
+
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Heart, Check } from "lucide-react"
+import SunflowerAnimation from "@/components/sunflower-animation"
+
+export default function RSVPPage() {
+  const [step, setStep] = useState("form")
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    attendance: "yes",
+    guests: "1",
+    dietary: "",
+    message: "",
+  })
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setStep("success")
+    setTimeout(() => setStep("form"), 5000)
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 relative overflow-hidden">
+      {/* Girassóis decorativos de fundo */}
+      <div className="absolute top-10 left-10 opacity-25 animate-float">
+        <SunflowerAnimation size="lg" />
+      </div>
+      <div className="absolute bottom-20 right-10 opacity-20 animate-sway" style={{ animationDelay: "0.5s" }}>
+        <SunflowerAnimation size="md" />
+      </div>
+      <div className="absolute top-1/3 right-5 opacity-15 animate-float" style={{ animationDelay: "1s" }}>
+        <SunflowerAnimation size="sm" />
+      </div>
+      <div className="absolute top-1/4 left-1/4 opacity-18 animate-sway" style={{ animationDelay: "1.5s" }}>
+        <SunflowerAnimation size="md" />
+      </div>
+      <div className="absolute bottom-1/3 left-5 opacity-22 animate-float" style={{ animationDelay: "0.8s" }}>
+        <SunflowerAnimation size="md" />
+      </div>
+      <div className="absolute top-1/2 right-1/4 opacity-16 animate-sway" style={{ animationDelay: "2s" }}>
+        <SunflowerAnimation size="lg" />
+      </div>
+      <div className="absolute bottom-10 right-1/3 opacity-20 animate-float" style={{ animationDelay: "1.2s" }}>
+        <SunflowerAnimation size="sm" />
+      </div>
+      <div className="absolute top-2/3 left-1/3 opacity-18 animate-sway" style={{ animationDelay: "0.3s" }}>
+        <SunflowerAnimation size="md" />
+      </div>
+
+      <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
+        {step === "form" ? (
+          <Card className="w-full max-w-2xl shadow-xl border-0">
+            <div className="relative overflow-hidden rounded-lg">
+              {/* Header com girassol */}
+              <div className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-amber-300 p-8 text-center relative">
+                <div className="absolute top-0 left-0 right-0 flex justify-center gap-8 opacity-15 animate-float">
+                  <SunflowerAnimation size="sm" />
+                  <SunflowerAnimation size="sm" />
+                  <SunflowerAnimation size="sm" />
+                </div>
+                <div className="relative z-10">
+                  <div className="inline-block mb-4 animate-bloom">
+                    <SunflowerAnimation size="md" />
+                  </div>
+                  <h1 className="text-4xl font-bold text-amber-900 mb-2 text-pretty">Celebrando com Amor</h1>
+                  <p className="text-amber-800 text-lg">Confirme sua presença em nosso grande dia</p>
+                </div>
+              </div>
+
+              {/* Formulário */}
+              <form onSubmit={handleSubmit} className="p-8 space-y-6">
+                <div className="flex items-center gap-2 mb-8">
+                  <Heart className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                  <h2 className="text-xl font-semibold text-amber-900">Seus Detalhes</h2>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-amber-900 mb-2">Nome Completo *</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
+                      placeholder="João da Silva"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-amber-900 mb-2">Email *</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
+                      placeholder="seu@email.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-amber-900 mb-2">Telefone</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
+                      placeholder="(00) 99999-9999"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-amber-900 mb-2">Número de Convidados *</label>
+                    <select
+                      name="guests"
+                      value={formData.guests}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
+                    >
+                      <option value="1">1 Pessoa</option>
+                      <option value="2">2 Pessoas</option>
+                      <option value="3">3 Pessoas</option>
+                      <option value="4">4 Pessoas</option>
+                      <option value="5">5+ Pessoas</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-amber-900 mb-3">Confirma sua presença? *</label>
+                  <div className="flex gap-4">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="attendance"
+                        value="yes"
+                        checked={formData.attendance === "yes"}
+                        onChange={handleInputChange}
+                        className="w-4 h-4 accent-yellow-500"
+                      />
+                      <span className="text-amber-900">✨ Vou estar lá!</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="attendance"
+                        value="no"
+                        checked={formData.attendance === "no"}
+                        onChange={handleInputChange}
+                        className="w-4 h-4 accent-yellow-500"
+                      />
+                      <span className="text-amber-900">Infelizmente não poderei</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-amber-900 mb-2">Restrições Dietéticas</label>
+                  <input
+                    type="text"
+                    name="dietary"
+                    value={formData.dietary}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
+                    placeholder="Ex: Vegetariano, sem glúten..."
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-amber-900 mb-2">Mensagem para os Noivos</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={3}
+                    className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900 resize-none"
+                    placeholder="Deixe sua mensagem aqui..."
+                  />
+                </div>
+
+                <div className="pt-4 flex gap-3">
+                  <Button
+                    type="submit"
+                    className="flex-1 bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-500 hover:to-amber-500 text-amber-900 font-semibold text-lg h-12 rounded-lg shadow-lg transition-all hover:shadow-xl"
+                  >
+                    <Heart className="w-5 h-5 mr-2" />
+                    Confirmar Presença
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </Card>
+        ) : (
+          <Card className="w-full max-w-md text-center p-8 shadow-xl border-0">
+            <div className="mb-6 flex justify-center">
+              <div className="animate-bloom">
+                <SunflowerAnimation size="lg" />
+              </div>
+            </div>
+            <div className="mb-4 inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-yellow-100 to-amber-100 rounded-full">
+              <Check className="w-8 h-8 text-yellow-600" />
+            </div>
+            <h2 className="text-3xl font-bold text-amber-900 mb-2">Obrigado!</h2>
+            <p className="text-amber-700 mb-4">Sua confirmação foi recebida com sucesso. Nos vemos em breve!</p>
+            <p className="text-sm text-amber-600">Um email de confirmação foi enviado para {formData.email}</p>
+          </Card>
+        )}
+      </div>
+    </div>
+  )
+}
