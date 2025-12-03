@@ -104,7 +104,7 @@ export default function RSVPPage() {
                   <div className="inline-block mb-4 animate-bloom">
                     <SunflowerAnimation size="md" />
                   </div>
-                  <h1 className="text-4xl font-bold text-amber-900 mb-2 text-pretty">Celebrando com Amor</h1>
+                  <h1 className="text-4xl font-bold text-amber-900 mb-2 text-pretty">Isabelle & Felipe</h1>
                   <p className="text-amber-800 text-lg">Confirme sua presença em nosso grande dia</p>
                 </div>
               </div>
