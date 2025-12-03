@@ -15,20 +15,50 @@ export default function RSVPPage() {
     email: "",
     phone: "",
     attendance: "yes",
-    guests: "1",
-    dietary: "",
     message: "",
   })
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setStep("success")
-    setTimeout(() => setStep("form"), 5000)
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const response = await fetch("/api/rsvp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Erro ao salvar confirmação")
+      }
+
+      setStep("success")
+      setTimeout(() => {
+        setStep("form")
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          attendance: "yes",
+          message: "",
+        })
+      }, 5000)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Erro desconhecido")
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -113,33 +143,16 @@ export default function RSVPPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-amber-900 mb-2">Telefone</label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
-                      placeholder="(00) 99999-9999"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-amber-900 mb-2">Número de Convidados *</label>
-                    <select
-                      name="guests"
-                      value={formData.guests}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
-                    >
-                      <option value="1">1 Pessoa</option>
-                      <option value="2">2 Pessoas</option>
-                      <option value="3">3 Pessoas</option>
-                      <option value="4">4 Pessoas</option>
-                      <option value="5">5+ Pessoas</option>
-                    </select>
-                  </div>
+                <div>
+                  <label className="block text-sm font-medium text-amber-900 mb-2">Telefone</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
+                    placeholder="(00) 99999-9999"
+                  />
                 </div>
 
                 <div>
@@ -171,18 +184,6 @@ export default function RSVPPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-amber-900 mb-2">Restrições Dietéticas</label>
-                  <input
-                    type="text"
-                    name="dietary"
-                    value={formData.dietary}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
-                    placeholder="Ex: Vegetariano, sem glúten..."
-                  />
-                </div>
-
-                <div>
                   <label className="block text-sm font-medium text-amber-900 mb-2">Mensagem para os Noivos</label>
                   <textarea
                     name="message"
@@ -194,13 +195,20 @@ export default function RSVPPage() {
                   />
                 </div>
 
+                {error && (
+                  <div className="p-4 bg-red-100 border-2 border-red-300 rounded-lg">
+                    <p className="text-red-800 text-sm">{error}</p>
+                  </div>
+                )}
+
                 <div className="pt-4 flex gap-3">
                   <Button
                     type="submit"
-                    className="flex-1 bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-500 hover:to-amber-500 text-amber-900 font-semibold text-lg h-12 rounded-lg shadow-lg transition-all hover:shadow-xl"
+                    disabled={isLoading}
+                    className="flex-1 bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-500 hover:to-amber-500 text-amber-900 font-semibold text-lg h-12 rounded-lg shadow-lg transition-all hover:shadow-xl disabled:opacity-50"
                   >
                     <Heart className="w-5 h-5 mr-2" />
-                    Confirmar Presença
+                    {isLoading ? "Salvando..." : "Confirmar Presença"}
                   </Button>
                 </div>
               </form>
