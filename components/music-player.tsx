@@ -8,31 +8,36 @@ import { Volume2, VolumeX, Play, Pause } from "lucide-react"
 export default function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [volume, setVolume] = useState(0.5)
+  const [hasAudio, setHasAudio] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
-  // Tentar tocar ao carregar a página (com restrição de autoplay do navegador)
   useEffect(() => {
-    const playAudio = () => {
-      if (audioRef.current) {
-        audioRef.current.volume = volume
-        const playPromise = audioRef.current.play()
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              setIsPlaying(true)
-            })
-            .catch(() => {
-              // Se o autoplay for bloqueado, permite ao usuário iniciar manualmente
-              console.log("Autoplay bloqueado. Clique no player para iniciar a música.")
-            })
+    const checkAndPlayAudio = async () => {
+      if (audioRef.current?.src) {
+        try {
+          const response = await fetch(audioRef.current.src, { method: "HEAD" })
+          if (response.ok) {
+            setHasAudio(true)
+            const playPromise = audioRef.current.play()
+            if (playPromise !== undefined) {
+              playPromise
+                .then(() => {
+                  setIsPlaying(true)
+                })
+                .catch(() => {
+                  console.log("Autoplay bloqueado. Clique no player para iniciar a música.")
+                })
+            }
+          }
+        } catch (error) {
+          console.log("Arquivo de áudio não encontrado. Adicione uma música em /public/wedding-music.mp3")
         }
       }
     }
 
-    // Aguardar um pequeno delay antes de tentar tocar
-    const timer = setTimeout(playAudio, 500)
+    const timer = setTimeout(checkAndPlayAudio, 500)
     return () => clearTimeout(timer)
-  }, [volume])
+  }, [])
 
   const togglePlay = () => {
     if (audioRef.current) {
@@ -40,7 +45,9 @@ export default function MusicPlayer() {
         audioRef.current.pause()
         setIsPlaying(false)
       } else {
-        audioRef.current.play()
+        audioRef.current.play().catch(() => {
+          console.log("Não foi possível reproduzir o áudio")
+        })
         setIsPlaying(true)
       }
     }
@@ -52,6 +59,11 @@ export default function MusicPlayer() {
     if (audioRef.current) {
       audioRef.current.volume = newVolume
     }
+  }
+
+  // Não renderizar player se não tiver arquivo de áudio
+  if (!hasAudio && !audioRef.current?.src) {
+    return null
   }
 
   return (
