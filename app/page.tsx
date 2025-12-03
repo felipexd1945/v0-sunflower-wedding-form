@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Heart, Check } from "lucide-react"
 import SunflowerAnimation from "@/components/sunflower-animation"
+import MusicPlayer from "@/components/music-player"
 
 export default function RSVPPage() {
   const [step, setStep] = useState("form")
@@ -88,6 +89,8 @@ export default function RSVPPage() {
       <div className="absolute top-2/3 left-1/3 opacity-18 animate-sway" style={{ animationDelay: "0.3s" }}>
         <SunflowerAnimation size="md" />
       </div>
+
+      <MusicPlayer />
 
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
         {step === "form" ? (
