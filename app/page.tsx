@@ -5,12 +5,13 @@ import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Heart, Check } from "lucide-react"
+import { Heart, Check, ChevronDown } from "lucide-react"
 import SunflowerAnimation from "@/components/sunflower-animation"
 import MusicPlayer from "@/components/music-player"
 
 export default function RSVPPage() {
   const [step, setStep] = useState("form")
+  const [expandComodities, setExpandComodities] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -126,28 +127,47 @@ export default function RSVPPage() {
                     <h3 className="text-lg font-semibold text-amber-900 mb-4 flex items-center gap-2">
                       📍 Local do Almoço
                     </h3>
-                    <p className="text-amber-800 text-base leading-relaxed">
+                    <a
+                      href="https://maps.google.com/?q=Rua+Eurides+Fernandes+do+Nascimento,+463,+Itaim+Paulista,+São+Paulo,+SP"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-amber-800 text-base leading-relaxed hover:text-yellow-600 hover:underline transition-colors cursor-pointer"
+                    >
                       Rua Eurides Fernandes do Nascimento, 463
                       <br />
                       Itaim Paulista - São Paulo, SP
-                    </p>
+                      <br />
+                      <span className="text-sm text-yellow-600 font-medium">🗺️ Ver no Google Maps</span>
+                    </a>
                   </div>
 
                   {/* Observações */}
-                  <div className="bg-amber-50 rounded-lg p-6 border-2 border-amber-200">
-                    <h3 className="text-lg font-semibold text-amber-900 mb-4 flex items-center gap-2">
-                      ✨ Comodidades
-                    </h3>
-                    <ul className="space-y-2 text-amber-800">
-                      <li className="flex items-center gap-3">
-                        <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
-                        Estacionamento disponível
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
-                        Piscina para aproveitar o dia
-                      </li>
-                    </ul>
+                  <div className="bg-amber-50 rounded-lg border-2 border-amber-200 overflow-hidden">
+                    <button
+                      onClick={() => setExpandComodities(!expandComodities)}
+                      className="w-full p-6 flex items-center justify-between hover:bg-amber-100 transition-colors"
+                    >
+                      <h3 className="text-lg font-semibold text-amber-900 flex items-center gap-2">✨ Comodidades</h3>
+                      <ChevronDown
+                        className={`w-5 h-5 text-amber-900 transition-transform ${
+                          expandComodities ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                    {expandComodities && (
+                      <div className="px-6 pb-6 pt-0 border-t-2 border-amber-200">
+                        <ul className="space-y-2 text-amber-800">
+                          <li className="flex items-center gap-3">
+                            <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                            Estacionamento disponível
+                          </li>
+                          <li className="flex items-center gap-3">
+                            <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                            Piscina para aproveitar o dia
+                          </li>
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
