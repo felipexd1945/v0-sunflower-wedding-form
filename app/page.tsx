@@ -128,11 +128,11 @@ export default function RSVPPage() {
                     <h3 className="text-2xl font-bold text-amber-900 mb-6">📍 Casarão - Itaim Paulista</h3>
 
                     {/* Data em destaque */}
-                    <p className="text-4xl font-bold text-yellow-600 mb-4">29/01/2026 - 12h00</p>
+                    <p className="text-4xl font-bold text-yellow-600 mb-4">25/01/2026 - 12h00</p>
 
                     {/* Countdown */}
                     <div className="mb-6">
-                      <Countdown targetDate="2026-01-29" />
+                      <Countdown targetDate="2026-01-25" />
                     </div>
 
                     {/* Endereço */}
