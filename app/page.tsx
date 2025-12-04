@@ -109,7 +109,7 @@ export default function RSVPPage() {
                     <SunflowerAnimation size="md" />
                   </div>
                   <h1 className="text-4xl font-bold text-amber-900 mb-2 text-pretty">Isabelle & Felipe</h1>
-                  <p className="text-amber-800 text-lg">Confirme sua presença em nosso grande dia</p>
+                  <p className="text-amber-800 text-lg">No tempo perfeito de Deus dois caminhos se tornam um só</p>
                 </div>
               </div>
 
