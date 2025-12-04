@@ -123,7 +123,7 @@ export default function RSVPPage() {
                   </div>
 
                   {/* Detalhes do evento */}
-                  <div className="bg-white rounded-lg p-6 border-2 border-yellow-200 shadow-sm">
+                  <div className="bg-white rounded-lg p-6 border-2 border-yellow-200 shadow-sm relative">
                     <h3 className="text-lg font-semibold text-amber-900 mb-4 flex items-center gap-2">
                       📍 Data e Local
                     </h3>
