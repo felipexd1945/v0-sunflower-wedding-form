@@ -194,13 +194,13 @@ export default function RSVPPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-amber-900 mb-2">Email *</label>
+                    <label className="block text-sm font-medium text-amber-900 mb-2">Email</label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      required
+                      
                       className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
                       placeholder="seu@email.com"
                     />
@@ -208,12 +208,13 @@ export default function RSVPPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-amber-900 mb-2">Telefone</label>
+                  <label className="block text-sm font-medium text-amber-900 mb-2">Telefone *</label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
+                    required
                     className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
                     placeholder="(00) 99999-9999"
                   />
