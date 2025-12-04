@@ -125,12 +125,8 @@ export default function RSVPPage() {
                   {/* Detalhes do evento */}
                   <div className="bg-white rounded-lg p-6 border-2 border-yellow-200 shadow-sm">
                     <h3 className="text-lg font-semibold text-amber-900 mb-4 flex items-center gap-2">
-                      📍 Data e Local
-                    </h3>
-                    <p className="text-amber-800 text-lg gap-2 mb-2">29/01/2026.</p>
-
-                    <p className="text-amber-800 text-lg gap-2 mb-2">Casarão - Itaim Paulista</p>
-                    
+                      📍 Casarão - Itaim Paulista
+                    </h3>                                                     
                     <a
                       href="https://maps.google.com/?q=Rua+Eurides+Fernandes+do+Nascimento,+353,+Itaim+Paulista,+São+Paulo,+SP"
                       target="_blank"
@@ -143,6 +139,9 @@ export default function RSVPPage() {
                       <br />
                       <span className="text-sm text-yellow-600 font-medium">🗺️ Ver no Google Maps</span>
                     </a>
+
+                    <p className="text-2xl text-amber-800 text-lg gap-2 mb-2"> 29/01/2026 </p>
+
                   </div>
 
                   {/* Observações */}
