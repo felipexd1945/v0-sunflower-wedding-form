@@ -112,6 +112,46 @@ export default function RSVPPage() {
                 </div>
               </div>
 
+              <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-8 border-t-2 border-yellow-200">
+                <div className="max-w-2xl mx-auto space-y-6">
+                  {/* Mensagem de boas-vindas */}
+                  <div className="text-center">
+                    <p className="text-lg text-amber-900 font-medium leading-relaxed">
+                      Venha celebrar conosco essa união! 💛
+                    </p>
+                  </div>
+
+                  {/* Detalhes do evento */}
+                  <div className="bg-white rounded-lg p-6 border-2 border-yellow-200 shadow-sm">
+                    <h3 className="text-lg font-semibold text-amber-900 mb-4 flex items-center gap-2">
+                      📍 Local do Almoço
+                    </h3>
+                    <p className="text-amber-800 text-base leading-relaxed">
+                      Rua Eurides Fernandes do Nascimento, 463
+                      <br />
+                      Itaim Paulista - São Paulo, SP
+                    </p>
+                  </div>
+
+                  {/* Observações */}
+                  <div className="bg-amber-50 rounded-lg p-6 border-2 border-amber-200">
+                    <h3 className="text-lg font-semibold text-amber-900 mb-4 flex items-center gap-2">
+                      ✨ Comodidades
+                    </h3>
+                    <ul className="space-y-2 text-amber-800">
+                      <li className="flex items-center gap-3">
+                        <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                        Estacionamento disponível
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                        Piscina para aproveitar o dia
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
               {/* Formulário */}
               <form onSubmit={handleSubmit} className="p-8 space-y-6">
                 <div className="flex items-center gap-2 mb-8">
@@ -187,7 +227,9 @@ export default function RSVPPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-amber-900 mb-2">Mensagem para os Recém Casados</label>
+                  <label className="block text-sm font-medium text-amber-900 mb-2">
+                    Mensagem para os Recém Casados
+                  </label>
                   <textarea
                     name="message"
                     value={formData.message}
