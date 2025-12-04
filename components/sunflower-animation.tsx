@@ -27,7 +27,7 @@ export default function SunflowerAnimation({ size = "md", animated = true }: Sun
       }}
     >
       <img
-        src="/sunflower.png"
+        src="/sunflower2.png"
         alt="Girassol decorativo"
         onLoad={() => console.log("[v0] Girassol carregado com sucesso")}
         onError={(e) => console.log("[v0] Erro ao carregar girassol:", e)}
