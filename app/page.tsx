@@ -118,7 +118,7 @@ export default function RSVPPage() {
                   {/* Mensagem de boas-vindas */}
                   <div className="text-center">
                     <p className="text-lg text-amber-900 font-medium leading-relaxed">
-                      Venha celebrar conosco essa união! 💛
+                      É com prazer que convidamos vocês para a comemoração da oficialização do nosso casamento. 💛
                     </p>
                   </div>
 
@@ -127,9 +127,9 @@ export default function RSVPPage() {
                     <h3 className="text-lg font-semibold text-amber-900 mb-4 flex items-center gap-2">
                       📍 Data e Local
                     </h3>
-                    <p className="text-amber-800 text-lg gap-2 mb-2">Dia 29 de Janeiro de 2026 ao meio dia (12h00).</p>
+                    <p className="text-amber-800 text-lg gap-2 mb-2">29/01/2026.</p>
 
-                    <p className="text-amber-800 text-lg gap-2 mb-2">Onde: Casarão - Itaim Paulista</p>
+                    <p className="text-amber-800 text-lg gap-2 mb-2">Casarão - Itaim Paulista</p>
                     
                     <a
                       href="https://maps.google.com/?q=Rua+Eurides+Fernandes+do+Nascimento,+353,+Itaim+Paulista,+São+Paulo,+SP"
