@@ -137,7 +137,7 @@ export default function RSVPPage() {
                       <br />
                       Itaim Paulista - São Paulo, SP
                       <br />
-                      <span className="text-sm text-yellow-600 font-medium">🗺️ Ver no Google Maps</span>
+                      <span className="text-sm text-yellow-600 font-medium mb-2">🗺️ Ver no Google Maps</span>
                     </a>
 
                     <p className="text-2xl text-amber-800 text-lg gap-2 mb-2"> 29/01/2026 </p>
