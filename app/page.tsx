@@ -129,7 +129,7 @@ export default function RSVPPage() {
                     </h3>
                     <p className="text-amber-800 text-lg gap-2 mb-2">Dia 29 de Janeiro de 2026 ao meio dia (12h00).</p>
 
-                    <p className="text-amber-800 text-lg gap-2">Onde: Casarão - Itaim Paulista</p>
+                    <p className="text-amber-800 text-lg gap-2 mb-2">Onde: Casarão - Itaim Paulista</p>
                     
                     <a
                       href="https://maps.google.com/?q=Rua+Eurides+Fernandes+do+Nascimento,+353,+Itaim+Paulista,+São+Paulo,+SP"
