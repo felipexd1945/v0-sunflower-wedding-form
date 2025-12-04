@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import Countdown from "@/components/countdown"
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -123,25 +124,30 @@ export default function RSVPPage() {
                   </div>
 
                   {/* Detalhes do evento */}
-                  <div className="bg-white rounded-lg p-6 border-2 border-yellow-200 shadow-sm">
-                    <h3 className="text-lg font-semibold text-amber-900 mb-4 flex items-center gap-2">
-                      📍 Casarão - Itaim Paulista
-                    </h3>                                                     
+                  <div className="bg-white rounded-lg p-8 border-2 border-yellow-200 shadow-sm text-center">
+                    <h3 className="text-2xl font-bold text-amber-900 mb-6">📍 Casarão - Itaim Paulista</h3>
+
+                    {/* Data em destaque */}
+                    <p className="text-5xl font-bold text-yellow-600 mb-4">29/01/2026</p>
+
+                    {/* Countdown */}
+                    <div className="mb-6">
+                      <Countdown targetDate="2026-01-29" />
+                    </div>
+
+                    {/* Endereço */}
                     <a
                       href="https://maps.google.com/?q=Rua+Eurides+Fernandes+do+Nascimento,+353,+Itaim+Paulista,+São+Paulo,+SP"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-amber-800 text-base leading-relaxed hover:text-yellow-600 hover:underline transition-colors cursor-pointer mb-2"
+                      className="text-amber-800 text-base leading-relaxed hover:text-yellow-600 hover:underline transition-colors cursor-pointer inline-block"
                     >
                       Rua Eurides Fernandes do Nascimento, 353
                       <br />
                       Itaim Paulista - São Paulo, SP
                       <br />
-                      <span className="text-sm text-yellow-600 font-medium mb-2">🗺️ Ver no Google Maps</span>
+                      <span className="text-sm text-yellow-600 font-medium">🗺️ Ver no Google Maps</span>
                     </a>
-
-                    <p className="text-2xl text-amber-800 text-lg gap-2 mb-2"> 29/01/2026 </p>
-
                   </div>
 
                   {/* Observações */}
@@ -181,7 +187,7 @@ export default function RSVPPage() {
                   <Heart className="w-5 h-5 text-yellow-500 fill-yellow-500" />
                   <h2 className="text-xl font-semibold text-amber-900">Seus Detalhes</h2>
                 </div>
-                  <p className="text-amber-800 text-lg">Confirme sua presença em nosso dia de celebração</p>
+                <p className="text-amber-800 text-lg">Confirme sua presença em nosso dia de celebração</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -203,7 +209,6 @@ export default function RSVPPage() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      
                       className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
                       placeholder="seu@email.com"
                     />
