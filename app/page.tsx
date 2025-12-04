@@ -128,12 +128,12 @@ export default function RSVPPage() {
                       📍 Local do Almoço
                     </h3>
                     <a
-                      href="https://maps.google.com/?q=Rua+Eurides+Fernandes+do+Nascimento,+463,+Itaim+Paulista,+São+Paulo,+SP"
+                      href="https://maps.google.com/?q=Rua+Eurides+Fernandes+do+Nascimento,+353,+Itaim+Paulista,+São+Paulo,+SP"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-amber-800 text-base leading-relaxed hover:text-yellow-600 hover:underline transition-colors cursor-pointer"
                     >
-                      Rua Eurides Fernandes do Nascimento, 463
+                      Rua Eurides Fernandes do Nascimento, 353
                       <br />
                       Itaim Paulista - São Paulo, SP
                       <br />
