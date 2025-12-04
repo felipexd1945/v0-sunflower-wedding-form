@@ -187,7 +187,7 @@ export default function RSVPPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-amber-900 mb-2">Mensagem para os Noivos</label>
+                  <label className="block text-sm font-medium text-amber-900 mb-2">Mensagem para os Recém Casados</label>
                   <textarea
                     name="message"
                     value={formData.message}
