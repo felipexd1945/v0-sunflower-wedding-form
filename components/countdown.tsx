@@ -39,9 +39,9 @@ export default function Countdown({ targetDate }: CountdownProps) {
   }, [targetDate])
 
   return (
-    <div className="bg-gradient-to-r from-yellow-400 via-amber-300 to-orange-400 rounded-lg p-4 shadow-lg border-2 border-yellow-500">
-      <p className="text-center text-amber-900 font-semibold text-sm mb-3">⏳ Faltam apenas:</p>
-      <div className="grid grid-cols-4 gap-2">
+    <div className="bg-gradient-to-r from-yellow-400 via-amber-300 to-orange-400 rounded-lg p-3 shadow-lg border-2 border-yellow-500">
+      <p className="text-center text-amber-900 font-semibold text-xs mb-2">⏳ Faltam apenas:</p>
+      <div className="grid grid-cols-4 gap-1">
         {[
           { value: timeLeft.days, label: "Dias" },
           { value: timeLeft.hours, label: "Horas" },
@@ -49,8 +49,8 @@ export default function Countdown({ targetDate }: CountdownProps) {
           { value: timeLeft.seconds, label: "Seg" },
         ].map((item) => (
           <div key={item.label} className="text-center">
-            <div className="bg-white bg-opacity-90 rounded-lg p-2 mb-1">
-              <p className="text-2xl font-bold text-amber-900">{String(item.value).padStart(2, "0")}</p>
+            <div className="bg-white bg-opacity-90 rounded-lg p-1 mb-0.5">
+              <p className="text-lg font-bold text-amber-900">{String(item.value).padStart(2, "0")}</p>
             </div>
             <p className="text-xs font-semibold text-amber-900">{item.label}</p>
           </div>
