@@ -127,7 +127,7 @@ export default function RSVPPage() {
                     <h3 className="text-lg font-semibold text-amber-900 mb-4 flex items-center gap-2">
                       📍 Data e Local
                     </h3>
-                    <p className="text-amber-800 text-lg gap-2">Dia 29 de Janeiro de 2026 ao 12h00.</p>
+                    <p className="text-amber-800 text-lg gap-2">Dia 29 de Janeiro de 2026 ao meio dia (12h00).</p>
 
                     <p className="text-amber-800 text-lg gap-2">Onde: Casarão - Itaim Paulista</p>
                     
