@@ -131,7 +131,7 @@ export default function RSVPPage() {
                       href="https://maps.google.com/?q=Rua+Eurides+Fernandes+do+Nascimento,+353,+Itaim+Paulista,+São+Paulo,+SP"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-amber-800 text-base leading-relaxed hover:text-yellow-600 hover:underline transition-colors cursor-pointer"
+                      className="text-amber-800 text-base leading-relaxed hover:text-yellow-600 hover:underline transition-colors cursor-pointer mb-2"
                     >
                       Rua Eurides Fernandes do Nascimento, 353
                       <br />
