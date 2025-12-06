@@ -8,29 +8,24 @@ import { Volume2, VolumeX, Play, Pause } from "lucide-react"
 export default function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [volume, setVolume] = useState(0.5)
-  const [hasAudio, setHasAudio] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
 
   useEffect(() => {
     const checkAndPlayAudio = async () => {
-      if (audioRef.current?.src) {
+      if (audioRef.current) {
         try {
-          const response = await fetch(audioRef.current.src, { method: "HEAD" })
-          if (response.ok) {
-            setHasAudio(true)
-            const playPromise = audioRef.current.play()
-            if (playPromise !== undefined) {
-              playPromise
-                .then(() => {
-                  setIsPlaying(true)
-                })
-                .catch(() => {
-                  console.log("Autoplay bloqueado. Clique no player para iniciar a música.")
-                })
-            }
+          const playPromise = audioRef.current.play()
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                setIsPlaying(true)
+              })
+              .catch(() => {
+                console.log("Autoplay bloqueado pelo navegador. Clique no player para iniciar a música.")
+              })
           }
         } catch (error) {
-          console.log("Arquivo de áudio não encontrado. Adicione uma música em /public/wedding-music.mp3")
+          console.log("Erro ao carregar áudio:", error)
         }
       }
     }
@@ -59,11 +54,6 @@ export default function MusicPlayer() {
     if (audioRef.current) {
       audioRef.current.volume = newVolume
     }
-  }
-
-  // Não renderizar player se não tiver arquivo de áudio
-  if (!hasAudio && !audioRef.current?.src) {
-    return null
   }
 
   return (
@@ -95,8 +85,7 @@ export default function MusicPlayer() {
         />
       </div>
 
-      {/* Elemento de áudio */}
-      <audio ref={audioRef} src="/wedding-music.mp3" loop crossOrigin="anonymous" />
+      <audio ref={audioRef} src="/Beyoncé - Love On Top (Instrumental).mp3" loop crossOrigin="anonymous" />
     </div>
   )
 }
