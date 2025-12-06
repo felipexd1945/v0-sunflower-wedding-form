@@ -143,18 +143,37 @@ export default function RSVPPage() {
         {step === "form" ? (
           <Card className="w-full max-w-2xl shadow-xl border-0">
             <div className="relative overflow-hidden rounded-lg">
-              <div className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-amber-300 p-8 text-center relative">
-                <div className="absolute top-0 left-0 right-0 flex justify-center gap-8 opacity-15 animate-float">
+              <div
+                className="relative p-8 text-center bg-cover bg-center h-80"
+                style={{
+                  backgroundImage: "url(/imageWe.jpeg)",
+                  backgroundPosition: "center 20%",
+                }}
+              >
+                {/* Overlay desfocado e escurecido */}
+                <div
+                  className="absolute inset-0 backdrop-blur-md"
+                  style={{
+                    backgroundColor: "rgba(0, 0, 0, 0.4)",
+                  }}
+                ></div>
+
+                <div className="absolute top-0 left-0 right-0 flex justify-center gap-8 opacity-0">
                   <SunflowerAnimation size="sm" />
                   <SunflowerAnimation size="sm" />
                   <SunflowerAnimation size="sm" />
                 </div>
+
                 <div className="relative z-10">
                   <div className="inline-block mb-4 animate-bloom">
                     <SunflowerAnimation size="md" />
                   </div>
-                  <h1 className="text-4xl font-script font-bold text-amber-900 mb-2 text-pretty">Isabelle & Felipe</h1>
-                  <p className="text-amber-800 text-lg">No tempo perfeito de Deus dois caminhos se tornam um só!</p>
+                  <h1 className="text-4xl font-script font-bold text-white mb-2 text-pretty drop-shadow-lg">
+                    Isabelle & Felipe
+                  </h1>
+                  <p className="text-white text-lg drop-shadow-md">
+                    No tempo perfeito de Deus dois caminhos se tornam um só!
+                  </p>
                 </div>
               </div>
 
