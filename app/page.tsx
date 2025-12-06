@@ -22,16 +22,62 @@ export default function RSVPPage() {
   })
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [phoneError, setPhoneError] = useState<string | null>(null)
+  const [phoneExists, setPhoneExists] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
+
+    if (name === "phone") {
+      setPhoneError(null)
+      setPhoneExists(false)
+    }
+  }
+
+  const validatePhone = async (phone: string) => {
+    if (!phone) {
+      setPhoneError("Telefone é obrigatório")
+      return false
+    }
+
+    try {
+      const response = await fetch("/api/check-phone", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ phone }),
+      })
+
+      const data = await response.json()
+
+      if (data.exists) {
+        setPhoneError("Este número de telefone já foi registrado em nosso sistema")
+        setPhoneExists(true)
+        return false
+      }
+
+      setPhoneError(null)
+      setPhoneExists(false)
+      return true
+    } catch (err) {
+      console.error("[v0] Erro ao validar telefone:", err)
+      setPhoneError("Erro ao validar telefone")
+      return false
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setError(null)
+
+    const isPhoneValid = await validatePhone(formData.phone)
+    if (!isPhoneValid) {
+      setIsLoading(false)
+      return
+    }
 
     try {
       const response = await fetch("/api/rsvp", {
@@ -66,7 +112,6 @@ export default function RSVPPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 relative overflow-hidden">
-      {/* Girassóis decorativos de fundo */}
       <div className="absolute top-10 left-10 opacity-25 animate-float">
         <SunflowerAnimation size="lg" />
       </div>
@@ -98,7 +143,6 @@ export default function RSVPPage() {
         {step === "form" ? (
           <Card className="w-full max-w-2xl shadow-xl border-0">
             <div className="relative overflow-hidden rounded-lg">
-              {/* Header com girassol */}
               <div className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-amber-300 p-8 text-center relative">
                 <div className="absolute top-0 left-0 right-0 flex justify-center gap-8 opacity-15 animate-float">
                   <SunflowerAnimation size="sm" />
@@ -116,26 +160,21 @@ export default function RSVPPage() {
 
               <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-8 border-t-2 border-yellow-200">
                 <div className="max-w-2xl mx-auto space-y-6">
-                  {/* Mensagem de boas-vindas */}
                   <div className="text-center">
                     <p className="text-lg text-amber-900 font-medium leading-relaxed">
                       É com prazer que convidamos vocês para a comemoração da oficialização do nosso casamento. 💛
                     </p>
                   </div>
 
-                  {/* Detalhes do evento */}
                   <div className="bg-white rounded-lg p-8 border-2 border-yellow-200 shadow-sm text-center">
                     <h3 className="text-2xl font-bold text-amber-900 mb-6">📍 Casarão - Itaim Paulista</h3>
 
-                    {/* Data em destaque */}
                     <p className="text-4xl font-bold text-yellow-600 mb-4">25/01/2026 - 12h00</p>
 
-                    {/* Countdown */}
                     <div className="mb-6">
                       <Countdown targetDate="2026-01-25" />
                     </div>
 
-                    {/* Endereço */}
                     <a
                       href="https://maps.google.com/?q=Rua+Eurides+Fernandes+do+Nascimento,+353,+Itaim+Paulista,+São+Paulo,+SP"
                       target="_blank"
@@ -150,7 +189,6 @@ export default function RSVPPage() {
                     </a>
                   </div>
 
-                  {/* Observações */}
                   <div className="bg-amber-50 rounded-lg border-2 border-amber-200 overflow-hidden">
                     <button
                       onClick={() => setExpandComodities(!expandComodities)}
@@ -181,7 +219,6 @@ export default function RSVPPage() {
                 </div>
               </div>
 
-              {/* Formulário */}
               <form onSubmit={handleSubmit} className="p-8 space-y-6">
                 <div className="flex items-center gap-2 mb-8">
                   <Heart className="w-5 h-5 text-yellow-500 fill-yellow-500" />
@@ -223,9 +260,12 @@ export default function RSVPPage() {
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
+                    className={`w-full px-4 py-2 border-2 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900 ${
+                      phoneError ? "border-red-400" : "border-amber-200"
+                    }`}
                     placeholder="(00) 99999-9999"
                   />
+                  {phoneError && <p className="text-red-600 text-sm mt-2 font-medium">{phoneError}</p>}
                 </div>
 
                 <div>
@@ -279,7 +319,7 @@ export default function RSVPPage() {
                 <div className="pt-4 flex gap-3">
                   <Button
                     type="submit"
-                    disabled={isLoading}
+                    disabled={isLoading || phoneExists}
                     className="flex-1 bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-500 hover:to-amber-500 text-amber-900 font-semibold text-lg h-12 rounded-lg shadow-lg transition-all hover:shadow-xl disabled:opacity-50"
                   >
                     <Heart className="w-5 h-5 mr-2" />
