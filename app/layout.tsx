@@ -6,21 +6,20 @@ import "./globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
-// <CHANGE> Adicionando fonte Pinyon Script para os nomes
 const _pinyonScript = Pinyon_Script({ weight: "400", subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
+  title: "Isabelle&Felipe",
+  description: "Venha Celebrar conosco",
   generator: "v0.app",
   icons: {
     icon: [
       {
-        url: "/icon-light-32x32.png",
+        url: "/sunflower2icon.png",
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: "/icon-dark-32x32.png",
+        url: "/sunflower2icon.png",
         media: "(prefers-color-scheme: dark)",
       },
       {
@@ -28,7 +27,7 @@ export const metadata: Metadata = {
         type: "image/svg+xml",
       },
     ],
-    apple: "/apple-icon.png",
+    apple: "/sunflower2icon.png",
   },
 }
 
