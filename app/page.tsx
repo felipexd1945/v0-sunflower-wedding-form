@@ -144,15 +144,16 @@ export default function RSVPPage() {
           <Card className="w-full max-w-2xl shadow-xl border-0">
             <div className="relative overflow-hidden rounded-lg">
               <div
-                className="relative p-8 text-center bg-cover bg-center h-80"
-                style={{
-                  backgroundImage: "url(/imageWe1.jpeg)",
-                  backgroundPosition: "center 20%",
-                }}
+                className="absolute inset-0"
+  style={{
+    backdropFilter: "none",
+    filter: "blur(4px)", // ↓ ajuste aqui
+    backgroundColor: "rgba(0,0,0,0.2)",
+  }}
               >
                 {/* Overlay desfocado e escurecido */}
                 <div
-                  className="absolute inset-0 backdrop-blur-sm"
+                  className="absolute inset-0 backdrop-blur-md"
                   style={{
                     backgroundColor: "rgba(0, 0, 0, 0.2)",
                   }}
