@@ -92,7 +92,7 @@ export default function MusicPlayer() {
       {/* Audio Element */}
       <audio
         ref={audioRef}
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/C-mAEtbNTIk4p0dQYgZVy3AjMUIEoPPv.mp3"
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/B-Instrumental-VQKSHPETS2ByC4pdEVPtcQmBU95JDF.mp3"
         loop
         crossOrigin="anonymous"
         onLoadedMetadata={() => console.log("[v0] Áudio carregado com metadados")}
