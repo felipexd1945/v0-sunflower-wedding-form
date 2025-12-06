@@ -154,7 +154,7 @@ export default function RSVPPage() {
                 <div
                   className="absolute inset-0 backdrop-blur-sm"
                   style={{
-                    backgroundColor: "rgba(0, 0, 0, 0.4)",
+                    backgroundColor: "rgba(0, 0, 0, 0.2)",
                   }}
                 ></div>
 
