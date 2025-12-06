@@ -14,18 +14,22 @@ export default function MusicPlayer() {
     const checkAndPlayAudio = async () => {
       if (audioRef.current) {
         try {
+          console.log("[v0] Audio ref disponível, tentando reproduzir...")
+          console.log("[v0] Src do áudio:", audioRef.current.src)
+
           const playPromise = audioRef.current.play()
           if (playPromise !== undefined) {
             playPromise
               .then(() => {
+                console.log("[v0] Música iniciou com sucesso!")
                 setIsPlaying(true)
               })
-              .catch(() => {
-                console.log("Autoplay bloqueado pelo navegador. Clique no player para iniciar a música.")
+              .catch((error) => {
+                console.log("[v0] Autoplay bloqueado ou erro:", error.message)
               })
           }
         } catch (error) {
-          console.log("Erro ao carregar áudio:", error)
+          console.log("[v0] Erro ao carregar áudio:", error)
         }
       }
     }
@@ -40,8 +44,8 @@ export default function MusicPlayer() {
         audioRef.current.pause()
         setIsPlaying(false)
       } else {
-        audioRef.current.play().catch(() => {
-          console.log("Não foi possível reproduzir o áudio")
+        audioRef.current.play().catch((error) => {
+          console.log("[v0] Erro ao reproduzir:", error.message)
         })
         setIsPlaying(true)
       }
@@ -85,7 +89,15 @@ export default function MusicPlayer() {
         />
       </div>
 
-      <audio ref={audioRef} src="/Beyoncé - Love On Top (Instrumental).mp3" loop crossOrigin="anonymous" />
+      <audio
+        ref={audioRef}
+        src="/Beyoncé - Love On Top (Instrumental).mp3"
+        loop
+        crossOrigin="anonymous"
+        onLoadedMetadata={() => console.log("[v0] Áudio carregado com metadados")}
+        onError={(e) => console.log("[v0] Erro ao carregar áudio:", e)}
+        onCanPlay={() => console.log("[v0] Áudio pronto para reprodução")}
+      />
     </div>
   )
 }
