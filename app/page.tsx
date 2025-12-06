@@ -1,39 +1,117 @@
 "use client"
 
 import type React from "react"
+import Countdown from "@/components/countdown"
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Heart, Check } from "lucide-react"
+import { Heart, Check, ChevronDown } from "lucide-react"
 import SunflowerAnimation from "@/components/sunflower-animation"
+import MusicPlayer from "@/components/music-player"
 
 export default function RSVPPage() {
   const [step, setStep] = useState("form")
+  const [expandComodities, setExpandComodities] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     attendance: "yes",
-    guests: "1",
-    dietary: "",
     message: "",
   })
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [phoneError, setPhoneError] = useState<string | null>(null)
+  const [phoneExists, setPhoneExists] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
+
+    if (name === "phone") {
+      setPhoneError(null)
+      setPhoneExists(false)
+    }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validatePhone = async (phone: string) => {
+    if (!phone) {
+      setPhoneError("Telefone é obrigatório")
+      return false
+    }
+
+    try {
+      const response = await fetch("/api/check-phone", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ phone }),
+      })
+
+      const data = await response.json()
+
+      if (data.exists) {
+        setPhoneError("Este número de telefone já foi registrado em nosso sistema")
+        setPhoneExists(true)
+        return false
+      }
+
+      setPhoneError(null)
+      setPhoneExists(false)
+      return true
+    } catch (err) {
+      console.error("[v0] Erro ao validar telefone:", err)
+      setPhoneError("Erro ao validar telefone")
+      return false
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setStep("success")
-    setTimeout(() => setStep("form"), 5000)
+    setIsLoading(true)
+    setError(null)
+
+    const isPhoneValid = await validatePhone(formData.phone)
+    if (!isPhoneValid) {
+      setIsLoading(false)
+      return
+    }
+
+    try {
+      const response = await fetch("/api/rsvp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Erro ao salvar confirmação")
+      }
+
+      setStep("success")
+      setTimeout(() => {
+        setStep("form")
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          attendance: "yes",
+          message: "",
+        })
+      }, 5000)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Erro desconhecido")
+      setIsLoading(false)
+    }
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 relative overflow-hidden">
-      {/* Girassóis decorativos de fundo */}
       <div className="absolute top-10 left-10 opacity-25 animate-float">
         <SunflowerAnimation size="lg" />
       </div>
@@ -59,32 +137,113 @@ export default function RSVPPage() {
         <SunflowerAnimation size="md" />
       </div>
 
+      <MusicPlayer />
+
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
         {step === "form" ? (
           <Card className="w-full max-w-2xl shadow-xl border-0">
             <div className="relative overflow-hidden rounded-lg">
-              {/* Header com girassol */}
-              <div className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-amber-300 p-8 text-center relative">
-                <div className="absolute top-0 left-0 right-0 flex justify-center gap-8 opacity-15 animate-float">
+              <div
+                className="relative p-8 text-center bg-cover bg-center h-80"
+                style={{
+                  backgroundImage: "url(/imageWe1.jpeg)",
+                  backgroundPosition: "center 20%",
+                }}
+              >
+                {/* Overlay desfocado e escurecido */}
+                <div
+                  className="absolute inset-0 backdrop-blur-sm"
+                  style={{
+                    backgroundColor: "rgba(0, 0, 0, 0.2)",
+                  }}
+                ></div>
+
+                <div className="absolute top-0 left-0 right-0 flex justify-center gap-8 opacity-0">
                   <SunflowerAnimation size="sm" />
                   <SunflowerAnimation size="sm" />
                   <SunflowerAnimation size="sm" />
                 </div>
+
                 <div className="relative z-10">
                   <div className="inline-block mb-4 animate-bloom">
                     <SunflowerAnimation size="md" />
                   </div>
-                  <h1 className="text-4xl font-bold text-amber-900 mb-2 text-pretty">Celebrando com Amor</h1>
-                  <p className="text-amber-800 text-lg">Confirme sua presença em nosso grande dia</p>
+                  <h1 className="text-4xl font-script font-bold text-white mb-2 text-pretty drop-shadow-lg">
+                    Isabelle & Felipe
+                  </h1>
+                  <p className="text-white text-lg drop-shadow-sm">
+                    No tempo perfeito de Deus dois caminhos se tornam um só!
+                  </p>
                 </div>
               </div>
 
-              {/* Formulário */}
+              <div className="bg-gradient-to-r from-yellow-50 to-amber-50 p-8 border-t-2 border-yellow-200">
+                <div className="max-w-2xl mx-auto space-y-6">
+                  <div className="text-center">
+                    <p className="text-lg text-amber-900 font-medium leading-relaxed">
+                      É com prazer que convidamos vocês para a comemoração da oficialização do nosso casamento. 💛
+                    </p>
+                  </div>
+
+                  <div className="bg-white rounded-lg p-8 border-2 border-yellow-200 shadow-sm text-center">
+                    <h3 className="text-2xl font-bold text-amber-900 mb-6">📍 Casarão - Itaim Paulista</h3>
+
+                    <p className="text-4xl font-bold text-yellow-600 mb-4">25/01/2026 - 12h00</p>
+
+                    <div className="mb-6">
+                      <Countdown targetDate="2026-01-25" />
+                    </div>
+
+                    <a
+                      href="https://maps.google.com/?q=Rua+Eurides+Fernandes+do+Nascimento,+353,+Itaim+Paulista,+São+Paulo,+SP"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-amber-800 text-base leading-relaxed hover:text-yellow-600 hover:underline transition-colors cursor-pointer inline-block"
+                    >
+                      Rua Eurides Fernandes do Nascimento, 353
+                      <br />
+                      Itaim Paulista - São Paulo, SP
+                      <br />
+                      <span className="text-sm text-yellow-600 font-medium">🗺️ Ver no Google Maps</span>
+                    </a>
+                  </div>
+
+                  <div className="bg-amber-50 rounded-lg border-2 border-amber-200 overflow-hidden">
+                    <button
+                      onClick={() => setExpandComodities(!expandComodities)}
+                      className="w-full p-6 flex items-center justify-between hover:bg-amber-100 transition-colors"
+                    >
+                      <h3 className="text-lg font-semibold text-amber-900 flex items-center gap-2">✨ Comodidades</h3>
+                      <ChevronDown
+                        className={`w-5 h-5 text-amber-900 transition-transform ${
+                          expandComodities ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                    {expandComodities && (
+                      <div className="px-6 pb-6 pt-0 border-t-2 border-amber-200">
+                        <ul className="space-y-2 text-amber-800">
+                          <li className="flex items-center gap-3">
+                            <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                            Estacionamento disponível
+                          </li>
+                          <li className="flex items-center gap-3">
+                            <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                            Piscina para aproveitar o dia
+                          </li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
               <form onSubmit={handleSubmit} className="p-8 space-y-6">
                 <div className="flex items-center gap-2 mb-8">
                   <Heart className="w-5 h-5 text-yellow-500 fill-yellow-500" />
                   <h2 className="text-xl font-semibold text-amber-900">Seus Detalhes</h2>
                 </div>
+                <p className="text-amber-800 text-lg">Confirme sua presença em nosso dia de celebração</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -100,46 +259,32 @@ export default function RSVPPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-amber-900 mb-2">Email *</label>
+                    <label className="block text-sm font-medium text-amber-900 mb-2">Email</label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      required
                       className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
                       placeholder="seu@email.com"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-amber-900 mb-2">Telefone</label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
-                      placeholder="(00) 99999-9999"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-amber-900 mb-2">Número de Convidados *</label>
-                    <select
-                      name="guests"
-                      value={formData.guests}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
-                    >
-                      <option value="1">1 Pessoa</option>
-                      <option value="2">2 Pessoas</option>
-                      <option value="3">3 Pessoas</option>
-                      <option value="4">4 Pessoas</option>
-                      <option value="5">5+ Pessoas</option>
-                    </select>
-                  </div>
+                <div>
+                  <label className="block text-sm font-medium text-amber-900 mb-2">Telefone *</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-4 py-2 border-2 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900 ${
+                      phoneError ? "border-red-400" : "border-amber-200"
+                    }`}
+                    placeholder="(00) 99999-9999"
+                  />
+                  {phoneError && <p className="text-red-600 text-sm mt-2 font-medium">{phoneError}</p>}
                 </div>
 
                 <div>
@@ -171,19 +316,9 @@ export default function RSVPPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-amber-900 mb-2">Restrições Dietéticas</label>
-                  <input
-                    type="text"
-                    name="dietary"
-                    value={formData.dietary}
-                    onChange={handleInputChange}
-                    className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900"
-                    placeholder="Ex: Vegetariano, sem glúten..."
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-amber-900 mb-2">Mensagem para os Noivos</label>
+                  <label className="block text-sm font-medium text-amber-900 mb-2">
+                    Mensagem para os Recém Casados
+                  </label>
                   <textarea
                     name="message"
                     value={formData.message}
@@ -194,13 +329,20 @@ export default function RSVPPage() {
                   />
                 </div>
 
+                {error && (
+                  <div className="p-4 bg-red-100 border-2 border-red-300 rounded-lg">
+                    <p className="text-red-800 text-sm">{error}</p>
+                  </div>
+                )}
+
                 <div className="pt-4 flex gap-3">
                   <Button
                     type="submit"
-                    className="flex-1 bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-500 hover:to-amber-500 text-amber-900 font-semibold text-lg h-12 rounded-lg shadow-lg transition-all hover:shadow-xl"
+                    disabled={isLoading || phoneExists}
+                    className="flex-1 bg-gradient-to-r from-yellow-400 to-amber-400 hover:from-yellow-500 hover:to-amber-500 text-amber-900 font-semibold text-lg h-12 rounded-lg shadow-lg transition-all hover:shadow-xl disabled:opacity-50"
                   >
                     <Heart className="w-5 h-5 mr-2" />
-                    Confirmar Presença
+                    {isLoading ? "Salvando..." : "Confirmar Presença"}
                   </Button>
                 </div>
               </form>
