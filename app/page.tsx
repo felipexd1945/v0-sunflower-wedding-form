@@ -171,7 +171,7 @@ export default function RSVPPage() {
                   <h1 className="text-4xl font-script font-bold text-white mb-2 text-pretty drop-shadow-lg">
                     Isabelle & Felipe
                   </h1>
-                  <p className="text-white text-lg drop-shadow-md">
+                  <p className="text-white text-lg drop-shadow-sm">
                     No tempo perfeito de Deus dois caminhos se tornam um só!
                   </p>
                 </div>
