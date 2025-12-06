@@ -146,7 +146,7 @@ export default function RSVPPage() {
               <div
                 className="relative p-8 text-center bg-cover bg-center h-80"
                 style={{
-                  backgroundImage: "url(/imageWe.jpeg)",
+                  backgroundImage: "url(/imageWe1.jpeg)",
                   backgroundPosition: "center 20%",
                 }}
               >
