@@ -6,12 +6,11 @@ import "./globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
-// <CHANGE> Adicionando fonte Pinyon Script para os nomes
 const _pinyonScript = Pinyon_Script({ weight: "400", subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
+  title: "Isabelle&Felipe",
+  description: "Venha Celebrar conosco",
   generator: "v0.app",
   icons: {
     icon: [
