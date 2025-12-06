@@ -152,10 +152,12 @@ export default function RSVPPage() {
               >
                 {/* Overlay desfocado e escurecido */}
                 <div
-                  className="absolute inset-0 backdrop-blur-sm"
-                  style={{
-                    backgroundColor: "rgba(0, 0, 0, 0.2)",
-                  }}
+                  className="absolute inset-0"
+  style={{
+    backdropFilter: "none",
+    filter: "blur(4px)", // ↓ ajuste aqui
+    backgroundColor: "rgba(0,0,0,0.2)",
+  }}
                 ></div>
 
                 <div className="absolute top-0 left-0 right-0 flex justify-center gap-8 opacity-0">
