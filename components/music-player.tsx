@@ -91,7 +91,7 @@ export default function MusicPlayer() {
 
       <audio
         ref={audioRef}
-        src="/Beyoncé - Love On Top (Instrumental).mp3"
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/B-Instrumental-VQKSHPETS2ByC4pdEVPtcQmBU95JDF.mp3"
         loop
         crossOrigin="anonymous"
         onLoadedMetadata={() => console.log("[v0] Áudio carregado com metadados")}
