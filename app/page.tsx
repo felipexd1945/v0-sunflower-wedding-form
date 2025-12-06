@@ -144,7 +144,7 @@ export default function RSVPPage() {
           <Card className="w-full max-w-2xl shadow-xl border-0">
             <div className="relative overflow-hidden rounded-lg">
               <div
-                className="relative p-8 text-center bg-cover bg-center h-40"
+                className="relative p-8 text-center bg-cover bg-center h-80"
                 style={{
                   backgroundImage: "url(/imageWe.jpeg)",
                   backgroundPosition: "center 20%",
