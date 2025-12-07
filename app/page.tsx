@@ -360,12 +360,22 @@ export default function RSVPPage() {
                 <SunflowerAnimation size="lg" />
               </div>
             </div>
-            <div className="mb-4 inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-yellow-100 to-amber-100 rounded-full">
-              <Check className="w-8 h-8 text-yellow-600" />
+            <div className="mb-6 flex justify-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-yellow-100 to-amber-100 rounded-full">
+                <Check className="w-8 h-8 text-yellow-600" />
+              </div>
             </div>
-            <h2 className="text-3xl font-bold text-amber-900 mb-2">Obrigado!</h2>
-            <p className="text-amber-700 mb-4">Sua confirmação foi recebida com sucesso. Nos vemos em breve!</p>
-            <p className="text-sm text-amber-600">Um email de confirmação foi enviado para {formData.email}</p>
+            {formData.attendance === "yes" ? (
+              <>
+                <h2 className="text-3xl font-bold text-amber-900 mb-2">Obrigado!</h2>
+                <p className="text-amber-700">Sua confirmação foi recebida com sucesso. Nos vemos em breve!</p>
+              </>
+            ) : (
+              <>
+                <h2 className="text-3xl font-bold text-amber-900 mb-2">Tudo bem!</h2>
+                <p className="text-amber-700">Poxa, é uma pena. Mas teremos outros momentos juntos! 💛</p>
+              </>
+            )}
           </Card>
         )}
       </div>
