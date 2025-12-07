@@ -153,11 +153,11 @@ export default function RSVPPage() {
                 {/* Overlay desfocado e escurecido */}
                 <div
                   className="absolute inset-0"
-  style={{
-    backdropFilter: "none",
-    filter: "blur(4px)", // ↓ ajuste aqui
-    backgroundColor: "rgba(0,0,0,0.2)",
-  }}
+                  style={{
+                    backdropFilter: "none",
+                    filter: "blur(4px)", // ↓ ajuste aqui
+                    backgroundColor: "rgba(0,0,0,0.2)",
+                  }}
                 ></div>
 
                 <div className="absolute top-0 left-0 right-0 flex justify-center gap-8 opacity-0">
@@ -329,6 +329,9 @@ export default function RSVPPage() {
                     className="w-full px-4 py-2 border-2 border-amber-200 rounded-lg focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-200 bg-white text-amber-900 resize-none"
                     placeholder="Deixe sua mensagem aqui..."
                   />
+                  <p className="text-xs text-amber-600 mt-2 italic">
+                    Este convite/confirmação é pessoal e destinado apenas para os convidados a quem foi entregue.
+                  </p>
                 </div>
 
                 {error && (

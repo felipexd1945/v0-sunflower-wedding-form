@@ -10,7 +10,7 @@ const _pinyonScript = Pinyon_Script({ weight: "400", subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Isabelle&Felipe",
-  description: "Venha Celebrar conosco",
+  description: "Venha celebrar conosco!",
   generator: "v0.app",
   icons: {
     icon: [
