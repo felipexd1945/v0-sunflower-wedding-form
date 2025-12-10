@@ -158,7 +158,7 @@ export default function RSVPPage() {
                   }}
                 ></div>
 
-                <div className="absolute top-0 left-0 right-0 flex justify-center gap-8 opacity-0">
+                <div className="absolute top-0 left-0 right-0 flex justify-center gap-8">
                   <SunflowerAnimation size="sm" />
                   <SunflowerAnimation size="sm" />
                   <SunflowerAnimation size="sm" />
