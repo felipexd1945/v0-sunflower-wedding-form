@@ -4,7 +4,6 @@ Project developed for **wedding RSVP (attendance confirmation)**, built with a s
 
 This repository is part of my **professional portfolio**, showcasing the integration of React, Supabase, Vercel, and v0.
 
----
 
 ## 🔗 Live Demo
 
@@ -13,7 +12,6 @@ The application is available in production:
 👉 **[https://v0-sunflower-wedding-form.vercel.app/](https://v0-sunflower-wedding-form.vercel.app/)**
 <img width="1467" height="774" alt="image" src="https://github.com/user-attachments/assets/eb59146d-5478-4176-92a7-a7e0a4ed367d" />
 
----
 
 ## 🧩 Overview
 
@@ -29,7 +27,6 @@ The project was designed to be:
 * **Mobile-first**
 * **Easy to maintain and extend**
 
----
 
 ## 🛠️ Tech Stack
 
@@ -38,7 +35,6 @@ The project was designed to be:
 * **Supabase** – Backend (Database + API)
 * **Vercel** – Deployment and hosting
 
----
 
 ## 🏗️ Architecture
 
@@ -49,7 +45,6 @@ The project was designed to be:
 
 The project stays automatically synchronized with **v0.app**, enabling fast iterations on layout and visual components.
 
----
 
 ## 🚀 Deployment
 
@@ -62,7 +57,6 @@ Deployment is fully handled by **Vercel**, providing:
 Vercel project link:
 👉 [https://vercel.com/felipexd1945s-projects/v0-sunflower-wedding-form](https://vercel.com/felipexd1945s-projects/v0-sunflower-wedding-form)
 
----
 
 ## 🔄 How It Works
 
@@ -71,7 +65,6 @@ Vercel project link:
 3. **Vercel** detects updates from GitHub
 4. A new deployment is triggered automatically
 
----
 
 ## 📌 Project Purpose
 
@@ -82,7 +75,6 @@ In addition to its personal use for my wedding, this project aims to:
 * Highlight experience with **continuous deployment using Vercel**
 * Present the ability to deliver a complete product, from design to production
 
----
 
 ## 📄 Future Improvements
 
@@ -91,7 +83,6 @@ In addition to its personal use for my wedding, this project aims to:
 * Advanced guest validation
 * Internationalization (i18n)
 
----
 
 ## 👤 Author
 
