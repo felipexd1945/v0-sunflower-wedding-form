@@ -88,3 +88,12 @@ In addition to its personal use for my wedding, this project aims to:
 * Admin area to view RSVP submissions
 * Confirmation notifications via email or WhatsApp
 * Advanced
+
+
+
+👤 Author
+
+Felipe Barros
+Salesforce Developer | Front-end Enthusiast
+
+Project built with care for a very special moment 🌻
