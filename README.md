@@ -11,6 +11,7 @@ This repository is part of my **professional portfolio**, showcasing the integra
 The application is available in production:
 
 👉 **[https://v0-sunflower-wedding-form.vercel.app/](https://v0-sunflower-wedding-form.vercel.app/)**
+<img width="1467" height="774" alt="image" src="https://github.com/user-attachments/assets/eb59146d-5478-4176-92a7-a7e0a4ed367d" />
 
 ---
 
@@ -89,7 +90,7 @@ In addition to its personal use for my wedding, this project aims to:
 * Confirmation notifications via email or WhatsApp
 * Advanced
 
-
+---
 
 👤 Author
 
