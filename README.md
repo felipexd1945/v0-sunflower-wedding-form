@@ -54,9 +54,6 @@ Deployment is fully handled by **Vercel**, providing:
 * Branch previews
 * A stable production environment
 
-Vercel project link:
-👉 [https://vercel.com/felipexd1945s-projects/v0-sunflower-wedding-form](https://vercel.com/felipexd1945s-projects/v0-sunflower-wedding-form)
-
 
 ## 🔄 How It Works
 
